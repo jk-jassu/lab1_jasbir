@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        table {
+            border: 1px solid bisque;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #fff; /* Table background color */
+        }
+
+        td {
+            border: 1px solid bisque;
+            padding: 8px;
+        }
+
+        #deleteMessage {
+            color: red;
+            font-weight: bold;
+        }
+
+        input[type="button"], button {
+            margin-top: 10px;
+            display: block;
+            background-color: #4CAF50; /* Green color for buttons */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover, button:hover {
+            background-color: #45a049; /* Darker green color on hover */
+        }
+    </style>
+    <script>
+        function insertrowbottom() {
+            var table = document.getElementById("TestTable");
+            var newRow = table.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            cell1.innerHTML = "Row" + (table.rows.length) + " Col1";
+            cell2.innerHTML = "Row" + (table.rows.length) + " Col2";
+            updateDeleteMessage();
+        }
+
+        function insertrowtop() {
+            var table = document.getElementById("TestTable");
+            if (table.rows.length > 0) {
+                table.deleteRow(0);
+                updateDeleteMessage();
+            } else {
+                setMessage("No more rows to delete.");
+            }
+        }
+
+        function insertrowbottomdelete() {
+            var table = document.getElementById("TestTable");
+            if (table.rows.length > 0) {
+                table.deleteRow(-1);
+                updateDeleteMessage();
+            } else {
+                setMessage("No more rows to delete.");
+            }
+        }
+
+        function deleteRowsStartingFromBelow() {
+            var table = document.getElementById("TestTable");
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+                updateDeleteMessage();
+            } else {
+                setMessage("No more rows to delete.");
+            }
+        }
+
+        function setMessage(message) {
+            var deleteMessage = document.getElementById("deleteMessage");
+            deleteMessage.innerHTML = message;
+        }
+
+        function updateDeleteMessage() {
+            var table = document.getElementById("TestTable");
+            var deleteMessage = document.getElementById("deleteMessage");
+            if (table.rows.length === 0) {
+                setMessage("No more rows to delete.");
+            } else {
+                deleteMessage.innerHTML = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <table id="TestTable" border="3">
+        <tr>
+            <td>Row1 Col1</td>
+            <td>Row1 col2</td>
+        </tr>
+        <tr>
+            <td>Row2 Col1</td>
+            <td>Row2 col2</td>
+        </tr>
+        <tr>
+            <td>Row3 Col1</td>
+            <td>Row3 col2</td>
+        </tr>
+        <tr>
+            <td>Row4 Col1</td>
+            <td>Row4 col2</td>
+        </tr>
+        <tr>
+            <td>Row5 Col1</td>
+            <td>Row5 col2</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <input type="button" onclick="insertrowbottom()" value="Insert Row">
+    <input type="button" onclick="insertrowtop()" value="Delete Row from Top">
+    <input type="button" onclick="insertrowbottomdelete()" value="Delete Row from Bottom">
+
+    <br>
+
+<p id="deleteMessage"></p>
+
+</body>
+
+</html>
